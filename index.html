@@ -3,28 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FighTruck - Site Officiel</title>
+    <title>Fightruck - Présentation Officielle</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            text-align: center;
-            padding: 50px;
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:wght@400;600;800&display=swap');
+
+        :root {
+            --bg-color: #faf8f5;
+            --primary-color: #ff5722;
+            --primary-hover: #e64a19;
+            --secondary-color: #4caf50;
+            --dark-color: #2c3e50;
+            --text-color: #34495e;
+            --card-bg: #ffffff;
         }
-        h1 { color: #ff4500; }
-        p { font-size: 1.2em; }
-        a { color: #00a8ff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        .header-banner {
+            padding: 50px 20px;
+            background: linear-gradient(135deg, var(--primary-color), #ff8a50);
+            color: white;
+            text-align: center;
+            border-bottom: 5px solid #e64a19;
+        }
+
+        .header-banner h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin: 0 0 10px 0;
+            font-family: 'Fredoka', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.15);
+        }
+
+        .header-banner p {
+            font-size: 1.3rem;
+            margin: 0;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            border-left: 6px solid var(--primary-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+            margin-top: 40px;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .grid-concept {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--card-bg);
+            border: 2px solid #eadfd0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-box strong {
+            display: block;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .stat-box span {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+
+        .concept-block {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #eadfd0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .map-list, .dev-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .map-list li, .dev-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .map-list li::before {
+            content: "📍";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1.2rem;
+        }
+
+        .dev-list li::before {
+            content: "⚙️";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1.2rem;
+        }
+
+        .character-pool {
+            background-color: #f0f4f8;
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #d6e4f0;
+        }
+
+        .tag-container {
+            margin-top: 15px;
+            line-height: 2.5;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--card-bg);
+            color: var(--dark-color);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: 2px solid #cbd5e1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        
+        .tag-highlight {
+            border-color: var(--secondary-color);
+            background-color: #e8f5e9;
+            color: var(--secondary-color);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 1rem;
+            color: #95a5a6;
+            margin-top: 60px;
+            border-top: 2px dashed #cbd5e1;
+            padding-top: 20px;
+            margin-bottom: 40px;
+        }
     </style>
 </head>
 <body>
-    <h1>FighTruck</h1>
-    <p>Bienvenue sur le site officiel de FighTruck ! Préparez-vous au combat.</p>
-    
-    <br><br>
-    <footer>
-        <a href="privacy.html">Politique de confidentialité</a>
-    </footer>
+
+    <div class="header-banner">
+        <h1>FIGHTRUCK</h1>
+        <p>Pitch de Présentation Officiel — Style Cartoon Multijoueur</p>
+    </div>
+
+    <div class="container">
+        
+        <h2 class="section-title">Le Concept du Jeu</h2>
+        <div class="concept-block">
+            <p style="margin: 0; font-size: 1.15rem;">
+                <strong>Fightruck</strong> est un jeu d'action multijoueur survolté se déroulant dans un univers résolument cartoon. Le cœur du jeu repose sur l'affrontement épique de héros complètement déjantés : des combattants <strong>mi-humains, mi-aliments</strong>. Chaque personnage tire son originalité et ses super-pouvoirs des propriétés physiques, chimiques ou gustatives de l'aliment qu'il incarne.
+            </p>
+        </div>
+
+        <div class="grid-concept">
+            <div class="stat-box">
+                <strong>4 vs 4</strong>
+                <span>Format Multijoueur</span>
+            </div>
+            <div class="stat-box">
+                <strong>10 min</strong>
+                <span>Durée d'une partie</span>
+            </div>
+            <div class="stat-box">
+                <strong>3 Manches</strong>
+                <span>Structure du Match</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Les 3 Premières Cartes (Maps)</h2>
+        <div class="concept-block">
+            <p style="margin: 0 0 15px 0; font-weight: 600;">L'objectif est de concevoir des environnements immersifs et interactifs, directement connectés à l'univers culinaire et fun du jeu :</p>
+            <ul class="map-list">
+                <li><strong>Le Food Truck :</strong> Le terrain de jeu d'origine, dynamique et confiné (Priorité actuelle du studio).</li>
+                <li><strong>Le Bout d'Océan :</strong> Un décor marin parfait pour les personnages aquatiques ou exotiques.</li>
+                <li><strong>La Fête Foraine :</strong> Un environnement festif, haut en couleur, idéal pour le style cartoon.</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">Le Roster : 24 Personnages Révélés</h2>
+        <div class="character-pool">
+            <p style="margin: 0; font-size: 1.05rem; color: #576574;"><em>Chaque héros dispose de capacités uniques liées à sa nature (ex: l'acidité du Citron, l'élasticité du Chewing-gum...) :</em></p>
+            <div class="tag-container">
+                <span class="tag">Pain</span>
+                <span class="tag">Chamallow</span>
+                <span class="tag">Pasta Box</span>
+                <span class="tag">Poisson</span>
+                <span class="tag">Chocolat</span>
+                <span class="tag">Homard</span>
+                <span class="tag">Sushi</span>
+                <span class="tag">Glace</span>
+                <span class="tag">Huître</span>
+                <span class="tag">Algue</span>
+                <span class="tag">Fromage</span>
+                <span class="tag">Calamar</span>
+                <span class="tag">Île Flottante</span>
+                <span class="tag">Lait</span>
+                <span class="tag">Tacos</span>
+                <span class="tag">Citron</span>
+                <span class="tag">Cerise</span>
+                <span class="tag">Fraise</span>
+                <span class="tag">Avocat</span>
+                <span class="tag">Grenade</span>
+                <span class="tag">Chewing-gum</span>
+                <span class="tag">Caramel</span>
+                <span class="tag">Viande</span>
+                <span class="tag">Kiwi</span>
+                <span class="tag tag-highlight">Slot #25 (Mystère)</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">État du Développement & Défis Techniques</h2>
+        <div class="concept-block">
+            <ul class="dev-list">
+                <li><strong>Réseau & Multi :</strong> Phase de finalisation de l'infrastructure multijoueur en ligne afin d'assurer des connexions stables en 4v4.</li>
+                <li><strong>Intégration des Héros :</strong> Prévue immédiatement après la validation finale de la couche réseau.</li>
+                <li><strong>Défi de l'Animation :</strong> Les modèles 3D ayant des morphologies très atypiques (non-humanoïdes classiques), le rigging automatique via <em>Mixamo</em> ne convient pas. Recherche active d'une solution d'animation personnalisée.</li>
+            </ul>
+        </div>
+
+        <div class="footer-note">
+            Document de présentation de projet — Propulsé par Unreal Engine & GitHub Pages
+        </div>
+
+    </div>
+
 </body>
 </html>
