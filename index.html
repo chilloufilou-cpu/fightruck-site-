@@ -1,313 +1,156 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fightruck – Jeu d'action multijoueur cartoon 4 vs 4 | SLHIDE</title>
-    <meta name="description" content="Fightruck est un jeu d'action multijoueur 4 vs 4 au style cartoon sur PC (Windows), développé et édité par SLHIDE, studio indépendant français. Des héros mi-humains, mi-aliments s'affrontent dans des maps déjantées.">
-    <meta property="og:title" content="Fightruck – Jeu d'action multijoueur cartoon 4 vs 4">
-    <meta property="og:description" content="Un jeu d'action multijoueur 4 vs 4 au style cartoon, par SLHIDE.">
-    <meta property="og:type" content="website">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:wght@400;600;800&display=swap');
-
-        :root {
-            --bg-color: #faf8f5;
-            --primary-color: #ff5722;
-            --secondary-color: #4caf50;
-            --dark-color: #2c3e50;
-            --text-color: #34495e;
-            --card-bg: #ffffff;
-            --border: #eadfd0;
-        }
-
-        * { box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            line-height: 1.6;
-        }
-
-        a { color: var(--primary-color); }
-
-        /* ---------- Barre de navigation ---------- */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 12px 24px;
-            background: var(--dark-color);
-            color: #fff;
-        }
-        .navbar .brand {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-            color: #fff;
-            text-decoration: none;
-        }
-        .navbar nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 18px;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        .navbar nav a:hover { color: #ff8a50; }
-
-        /* ---------- En-tête ---------- */
-        .header-banner {
-            padding: 60px 20px;
-            background: linear-gradient(135deg, var(--primary-color), #ff8a50);
-            color: white;
-            text-align: center;
-            border-bottom: 5px solid #e64a19;
-        }
-        .header-banner h1 {
-            font-size: 3.5rem;
-            margin: 0 0 10px 0;
-            font-family: 'Fredoka', sans-serif;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 0 rgba(0,0,0,0.15);
-        }
-        .header-banner .tagline { font-size: 1.3rem; margin: 0 0 8px 0; }
-        .header-banner .by { font-size: 1rem; margin: 0; opacity: 0.95; }
-        .header-banner .by a { color: #fff; font-weight: 600; }
-
-        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-
-        .section-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            border-left: 6px solid var(--primary-color);
-            padding-left: 15px;
-            margin: 40px 0 20px 0;
-            font-family: 'Fredoka', sans-serif;
-            scroll-margin-top: 110px; /* évite que la barre fixe cache le titre */
-        }
-
-        .block {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            border: 2px solid var(--border);
-            margin-bottom: 30px;
-        }
-        .block p { margin: 0 0 12px 0; }
-        .block p:last-child { margin-bottom: 0; }
-
-        .grid { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
-        .stat-box {
-            flex: 1;
-            min-width: 180px;
-            background: var(--card-bg);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .stat-box strong {
-            display: block;
-            font-size: 2rem;
-            color: var(--primary-color);
-            font-family: 'Fredoka', sans-serif;
-        }
-        .stat-box span { color: #7f8c8d; font-weight: 600; }
-
-        .fact-table { width: 100%; border-collapse: collapse; }
-        .fact-table th, .fact-table td {
-            text-align: left;
-            padding: 10px 8px;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-        }
-        .fact-table th { width: 38%; color: var(--dark-color); }
-
-        .list { list-style: none; padding: 0; margin: 0; }
-        .list li { position: relative; padding-left: 32px; margin-bottom: 12px; }
-        .list li::before { position: absolute; left: 0; top: 1px; }
-        .list.maps li::before { content: "📍"; }
-        .list.dev li::before { content: "⚙️"; }
-
-        .tag-container { margin-top: 12px; line-height: 2.5; }
-        .tag {
-            display: inline-block;
-            background: #fff;
-            color: var(--dark-color);
-            padding: 4px 14px;
-            border-radius: 30px;
-            font-weight: 600;
-            margin: 0 8px 8px 0;
-            border: 2px solid #cbd5e1;
-        }
-        .tag-highlight { border-color: var(--secondary-color); background: #e8f5e9; color: var(--secondary-color); }
-
-        footer {
-            text-align: center;
-            font-size: 0.95rem;
-            color: #7f8c8d;
-            border-top: 2px dashed #cbd5e1;
-            padding: 24px 20px 40px;
-            margin-top: 50px;
-        }
-        footer p { margin: 4px 0; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fightruck – Jeu d'action multijoueur cartoon 4 vs 4 | SLHIDE</title>
+  <meta name="description" content="Fightruck est un jeu d'action multijoueur 4 vs 4 au style cartoon sur PC (Windows), développé et édité par SLHIDE, studio indépendant français.">
+  <meta property="og:title" content="Fightruck – Jeu d'action multijoueur cartoon 4 vs 4">
+  <meta property="og:description" content="Un jeu d'action multijoueur 4 vs 4 au style cartoon, par SLHIDE.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header class="navbar">
+    <a class="brand" href="index.html">FIGHTRUCK</a>
+    <nav>
+      <a href="#jeu">Le jeu</a>
+      <a href="#editeur">Éditeur</a>
+      <a href="#contact">Contact</a>
+      <a href="privacy.html">Confidentialité</a>
+      <a href="#conditions">Conditions</a>
+    </nav>
+  </header>
 
-    <header class="navbar">
-        <a class="brand" href="#">FIGHTRUCK</a>
-        <nav>
-            <a href="#jeu">Le jeu</a>
-            <a href="#editeur">Éditeur</a>
-            <a href="#contact">Contact</a>
-            <a href="#confidentialite">Confidentialité</a>
-            <a href="#conditions">Conditions</a>
-        </nav>
-    </header>
+  <div class="header-banner">
+    <h1>FIGHTRUCK</h1>
+    <p class="tagline">Jeu d'action multijoueur 4 vs 4 au style cartoon, sur PC (Windows)</p>
+    <p class="by">Développé et édité par <strong>SLHIDE</strong>, studio indépendant français.</p>
+  </div>
 
-    <div class="header-banner">
-        <h1>FIGHTRUCK</h1>
-        <p class="tagline">Jeu d'action multijoueur 4 vs 4 au style cartoon, sur PC (Windows)</p>
-        <p class="by">Un jeu développé et édité par <a href="https://slhide.free.nf" target="_blank" rel="noopener">SLHIDE</a>, studio indépendant français.</p>
+  <main class="container">
+
+    <h2 class="section-title" id="jeu">Le jeu</h2>
+    <div class="block">
+      <p>
+        <strong>Fightruck</strong> est un jeu d'action multijoueur survolté dans un univers cartoon.
+        Deux équipes de quatre joueurs s'affrontent avec des héros <strong>mi-humains, mi-aliments</strong>.
+        Chaque personnage tire ses pouvoirs des propriétés de l'aliment qu'il incarne : l'acidité du citron,
+        l'élasticité du chewing-gum, le froid de la glace…
+      </p>
+      <p>
+        Les joueurs peuvent créer une partie, rejoindre celle d'un ami et jouer ensemble en ligne
+        grâce à leur compte Epic Games.
+      </p>
     </div>
 
-    <main class="container">
+    <div class="block">
+      <h3>Fiche du jeu</h3>
+      <table class="fact-table">
+        <tr><th>Titre</th><td>Fightruck</td></tr>
+        <tr><th>Genre</th><td>Jeu d'action multijoueur en équipe, style cartoon</td></tr>
+        <tr><th>Mode de jeu</th><td>4 contre 4, en ligne</td></tr>
+        <tr><th>Format d'un match</th><td>3 manches, environ 10 minutes</td></tr>
+        <tr><th>Plateforme</th><td>PC (Windows)</td></tr>
+        <tr><th>Moteur</th><td>Unreal Engine 5</td></tr>
+        <tr><th>Services en ligne</th><td>Epic Online Services (connexion avec un compte Epic Games, liste d'amis, statut en ligne, parties)</td></tr>
+        <tr><th>Langue</th><td>Français</td></tr>
+        <tr><th>Statut</th><td>En développement</td></tr>
+        <tr><th>Éditeur / Développeur</th><td>SLHIDE (France)</td></tr>
+      </table>
+    </div>
 
-        <h2 class="section-title" id="jeu">Le jeu</h2>
-        <div class="block">
-            <p>
-                <strong>Fightruck</strong> est un jeu d'action multijoueur survolté qui se déroule dans un univers cartoon.
-                Deux équipes de quatre joueurs s'affrontent avec des héros complètement déjantés : des combattants
-                <strong>mi-humains, mi-aliments</strong>. Chaque personnage tire ses pouvoirs des propriétés de l'aliment
-                qu'il incarne : l'acidité du citron, l'élasticité du chewing-gum, le froid de la glace...
-            </p>
-            <p>
-                Les joueurs peuvent créer une partie, rejoindre celle d'un ami et jouer ensemble en ligne grâce à
-                leur compte Epic Games.
-            </p>
-        </div>
+    <div class="grid">
+      <div class="stat-box"><strong>4 vs 4</strong><span>Format multijoueur</span></div>
+      <div class="stat-box"><strong>10 min</strong><span>Durée d'une partie</span></div>
+      <div class="stat-box"><strong>3 manches</strong><span>Structure du match</span></div>
+    </div>
 
-        <div class="block">
-            <table class="fact-table">
-                <tr><th>Titre</th><td>Fightruck</td></tr>
-                <tr><th>Genre</th><td>Jeu d'action multijoueur en équipe, style cartoon</td></tr>
-                <tr><th>Mode de jeu</th><td>4 contre 4, en ligne (connexion entre joueurs)</td></tr>
-                <tr><th>Format d'un match</th><td>3 manches, environ 10 minutes</td></tr>
-                <tr><th>Plateforme</th><td>PC (Windows)</td></tr>
-                <tr><th>Moteur</th><td>Unreal Engine 5</td></tr>
-                <tr><th>Services en ligne</th><td>Epic Online Services (connexion avec un compte Epic Games, liste d'amis, parties)</td></tr>
-                <tr><th>Statut</th><td>En développement</td></tr>
-                <tr><th>Éditeur</th><td>SLHIDE</td></tr>
-            </table>
-        </div>
+    <h2 class="section-title">Les premières cartes</h2>
+    <div class="block">
+      <p>Des environnements interactifs, liés à l'univers culinaire et fun du jeu :</p>
+      <ul class="list maps">
+        <li><strong>Le Food Truck :</strong> le terrain de jeu d'origine, dynamique et confiné (en cours de création).</li>
+        <li><strong>Le Bout d'Océan :</strong> un décor marin pour les personnages aquatiques ou exotiques.</li>
+        <li><strong>La Fête Foraine :</strong> un environnement festif et très coloré.</li>
+      </ul>
+    </div>
 
-        <div class="grid">
-            <div class="stat-box"><strong>4 vs 4</strong><span>Format multijoueur</span></div>
-            <div class="stat-box"><strong>10 min</strong><span>Durée d'une partie</span></div>
-            <div class="stat-box"><strong>3 manches</strong><span>Structure du match</span></div>
-        </div>
+    <h2 class="section-title">Les personnages</h2>
+    <div class="block">
+      <p>24 héros révélés à ce jour, chacun avec des capacités liées à sa nature :</p>
+      <div class="tag-container">
+        <span class="tag">Pain</span><span class="tag">Chamallow</span><span class="tag">Pasta Box</span>
+        <span class="tag">Poisson</span><span class="tag">Chocolat</span><span class="tag">Homard</span>
+        <span class="tag">Sushi</span><span class="tag">Glace</span><span class="tag">Huître</span>
+        <span class="tag">Algue</span><span class="tag">Fromage</span><span class="tag">Calamar</span>
+        <span class="tag">Île Flottante</span><span class="tag">Lait</span><span class="tag">Tacos</span>
+        <span class="tag">Citron</span><span class="tag">Cerise</span><span class="tag">Fraise</span>
+        <span class="tag">Avocat</span><span class="tag">Grenade</span><span class="tag">Chewing-gum</span>
+        <span class="tag">Caramel</span><span class="tag">Viande</span><span class="tag">Kiwi</span>
+        <span class="tag tag-highlight">Slot #25 (mystère)</span>
+      </div>
+    </div>
 
-        <h2 class="section-title">Les premières cartes</h2>
-        <div class="block">
-            <p>Des environnements interactifs, directement liés à l'univers culinaire et fun du jeu :</p>
-            <ul class="list maps">
-                <li><strong>Le Food Truck :</strong> le terrain de jeu d'origine, dynamique et confiné (en cours de création).</li>
-                <li><strong>Le Bout d'Océan :</strong> un décor marin pour les personnages aquatiques ou exotiques.</li>
-                <li><strong>La Fête Foraine :</strong> un environnement festif et très coloré.</li>
-            </ul>
-        </div>
+    <h2 class="section-title">État du développement</h2>
+    <div class="block">
+      <ul class="list dev">
+        <li><strong>Multijoueur en ligne :</strong> en cours de finalisation, pour des connexions stables en 4 vs 4 (création de parties, liste d'amis, invitations).</li>
+        <li><strong>Intégration des héros :</strong> prévue après la validation de la couche réseau.</li>
+        <li><strong>Animation :</strong> les modèles 3D, aux formes atypiques, utilisent une solution d'animation sur mesure.</li>
+      </ul>
+    </div>
 
-        <h2 class="section-title">Les personnages</h2>
-        <div class="block">
-            <p>24 héros révélés à ce jour, chacun avec des capacités liées à sa nature :</p>
-            <div class="tag-container">
-                <span class="tag">Pain</span><span class="tag">Chamallow</span><span class="tag">Pasta Box</span>
-                <span class="tag">Poisson</span><span class="tag">Chocolat</span><span class="tag">Homard</span>
-                <span class="tag">Sushi</span><span class="tag">Glace</span><span class="tag">Huître</span>
-                <span class="tag">Algue</span><span class="tag">Fromage</span><span class="tag">Calamar</span>
-                <span class="tag">Île Flottante</span><span class="tag">Lait</span><span class="tag">Tacos</span>
-                <span class="tag">Citron</span><span class="tag">Cerise</span><span class="tag">Fraise</span>
-                <span class="tag">Avocat</span><span class="tag">Grenade</span><span class="tag">Chewing-gum</span>
-                <span class="tag">Caramel</span><span class="tag">Viande</span><span class="tag">Kiwi</span>
-                <span class="tag tag-highlight">Slot #25 (mystère)</span>
-            </div>
-        </div>
+    <h2 class="section-title" id="editeur">À propos de l'éditeur</h2>
+    <div class="block">
+      <p>
+        <strong>SLHIDE</strong> est un studio indépendant français qui crée des jeux vidéo.
+        Fightruck est son premier projet ; il est entièrement développé et édité par SLHIDE.
+      </p>
+      <table class="fact-table">
+        <tr><th>Nom de l'éditeur</th><td>SLHIDE</td></tr>
+        <tr><th>Pays</th><td>France</td></tr>
+        <tr><th>Responsable de publication</th><td>[À COMPLÉTER : Prénom NOM]</td></tr>
+        <tr><th>Contact</th><td><a href="mailto:louiswan74@gmail.com">louiswan74@gmail.com</a></td></tr>
+        <tr><th>Hébergeur du site</th><td>[À COMPLÉTER : ex. GitHub Pages – GitHub, Inc., San Francisco, USA]</td></tr>
+      </table>
+    </div>
 
-        <h2 class="section-title">État du développement</h2>
-        <div class="block">
-            <ul class="list dev">
-                <li><strong>Multijoueur en ligne :</strong> en cours de finalisation, pour des connexions stables en 4 vs 4 (création de parties, liste d'amis, invitations).</li>
-                <li><strong>Intégration des héros :</strong> prévue après la validation de la couche réseau.</li>
-                <li><strong>Animation :</strong> les modèles 3D, aux formes atypiques, utilisent une solution d'animation sur mesure.</li>
-            </ul>
-        </div>
+    <h2 class="section-title" id="contact">Contact</h2>
+    <div class="block">
+      <p>Pour toute question sur le jeu, un partenariat ou une demande liée à vos données personnelles :</p>
+      <p><a href="mailto:louiswan74@gmail.com">louiswan74@gmail.com</a></p>
+    </div>
 
-        <h2 class="section-title" id="editeur">À propos de l'éditeur</h2>
-        <div class="block">
-            <p>
-                <strong>SLHIDE</strong> est un studio indépendant basé en France qui crée des jeux vidéo.
-                Fightruck est développé et édité par SLHIDE.
-            </p>
-            <p>Site du studio : <a href="https://slhide.free.nf" target="_blank" rel="noopener">slhide.free.nf</a></p>
-        </div>
+    <h2 class="section-title" id="confidentialite">Politique de confidentialité</h2>
+    <div class="block">
+      <p>
+        Fightruck utilise Epic Online Services pour la connexion avec un compte Epic Games, la liste d'amis
+        et les parties en ligne. Nous n'accédons qu'à votre identifiant et nom d'affichage Epic, votre liste
+        d'amis et votre statut en ligne, et nous ne vendons aucune donnée.
+      </p>
+      <p>
+        👉 <a href="privacy.html"><strong>Lire la politique de confidentialité complète</strong></a>
+        (<a href="privacy.html#en">English version</a>)
+      </p>
+    </div>
 
-        <h2 class="section-title" id="contact">Contact</h2>
-        <div class="block">
-            <p>Pour toute question sur le jeu, un partenariat ou une demande liée à vos données :</p>
-            <p><a href="mailto:louiswan74@gmail.com">louiswan74@gmail.com</a></p>
-        </div>
+    <h2 class="section-title" id="conditions">Conditions d'utilisation</h2>
+    <div class="block">
+      <p>
+        Fightruck est un jeu en cours de développement, proposé en l'état. En l'utilisant, vous acceptez de ne pas
+        tricher, de ne pas perturber les parties des autres joueurs et de les respecter. SLHIDE peut suspendre
+        l'accès d'un joueur qui enfreint ces règles. Les conditions pourront évoluer pendant le développement.
+      </p>
+      <p>Questions : <a href="mailto:louiswan74@gmail.com">louiswan74@gmail.com</a></p>
+    </div>
+  </main>
 
-        <h2 class="section-title" id="confidentialite">Politique de confidentialité</h2>
-        <div class="block">
-            <p><em>Dernière mise à jour : 23 novembre 2026.</em></p>
-            <p>
-                Fightruck utilise <strong>Epic Online Services</strong> pour la connexion avec un compte Epic Games, la
-                liste d'amis et les parties en ligne. Avec votre accord, lors de la connexion, le jeu accède uniquement à :
-            </p>
-            <ul class="list dev">
-                <li>votre <strong>nom d'affichage</strong> Epic Games ;</li>
-                <li>votre <strong>liste d'amis</strong> (pour vous montrer ceux qui jouent à Fightruck) ;</li>
-                <li>votre <strong>statut en ligne</strong> (pour que vos amis vous voient et puissent vous inviter).</li>
-            </ul>
-            <p>
-                Ces données servent uniquement à vous permettre de jouer avec vos amis. Elles ne sont ni vendues ni partagées
-                avec des tiers. Le jeu ne vous demande pas votre mot de passe Epic Games : la connexion se fait sur les pages d'Epic.
-            </p>
-            <p>
-                Vous pouvez retirer l'accès du jeu à votre compte depuis les paramètres de votre compte Epic Games.
-                Pour toute question ou demande concernant vos données, écrivez à
-                <a href="mailto:louiswan74@gmail.com">louiswan74@gmail.com</a>.
-            </p>
-        </div>
-
-        <h2 class="section-title" id="conditions">Conditions d'utilisation</h2>
-        <div class="block">
-            <p>
-                Fightruck est un jeu en cours de développement, proposé en l'état. En l'utilisant, vous acceptez de ne pas
-                tricher, de ne pas perturber les parties des autres joueurs et de respecter les autres joueurs. SLHIDE peut
-                suspendre l'accès d'un joueur qui enfreint ces règles. Les conditions pourront évoluer pendant le développement.
-            </p>
-            <p>Questions : <a href="mailto:louiswan74@gmail.com">louiswan74@gmail.com</a>.</p>
-        </div>
-
-    </main>
-
-    <footer>
-        <p><strong>Fightruck</strong> © 2026 SLHIDE. Tous droits réservés.</p>
-        <p>Fightruck est développé avec Unreal Engine et utilise Epic Online Services.</p>
-        <p>Epic Games, Epic Online Services et Unreal Engine sont des marques d'Epic Games, Inc.</p>
-    </footer>
-
+  <footer>
+    <p><strong>Fightruck</strong> © 2026 SLHIDE. Tous droits réservés.</p>
+    <p><a href="privacy.html">Politique de confidentialité</a> · <a href="#conditions">Conditions d'utilisation</a> · <a href="mailto:louiswan74@gmail.com">Contact</a></p>
+    <p>Fightruck est développé avec Unreal Engine et utilise Epic Online Services.</p>
+    <p>Epic Games, Epic Online Services et Unreal Engine sont des marques ou marques déposées d'Epic Games, Inc.</p>
+  </footer>
 </body>
 </html>
