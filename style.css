@@ -1,0 +1,60 @@
+:root {
+  --bg-color: #faf8f5;
+  --primary-color: #ff5722;
+  --secondary-color: #4caf50;
+  --dark-color: #2c3e50;
+  --text-color: #34495e;
+  --card-bg: #ffffff;
+  --border: #eadfd0;
+  --font-title: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  --font-body: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font-body); color: var(--text-color); background: var(--bg-color); line-height: 1.6; }
+a { color: #d84315; }
+
+.navbar { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 24px; background: var(--dark-color); color: #fff; }
+.navbar .brand { font-family: var(--font-title); font-weight: 700; font-size: 1.4rem; letter-spacing: 1px; color: #fff; text-decoration: none; }
+.navbar nav a { color: #fff; text-decoration: none; margin-left: 18px; font-weight: 600; font-size: .95rem; }
+.navbar nav a:hover { color: #ff8a50; }
+
+.header-banner { padding: 60px 20px; background: linear-gradient(135deg, var(--primary-color), #ff8a50); color: #fff; text-align: center; border-bottom: 5px solid #e64a19; }
+.header-banner h1 { font-size: 3.2rem; margin: 0 0 10px; font-family: var(--font-title); letter-spacing: 2px; text-shadow: 3px 3px 0 rgba(0,0,0,.15); }
+.header-banner .tagline { font-size: 1.3rem; margin: 0 0 8px; }
+.header-banner .by { margin: 0; }
+.header-banner .by a { color: #fff; font-weight: 600; }
+
+.container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+.section-title { font-size: 1.7rem; color: #d84315; border-left: 6px solid var(--primary-color); padding-left: 15px; margin: 40px 0 20px; font-family: var(--font-title); scroll-margin-top: 80px; }
+.block { background: var(--card-bg); border-radius: 12px; padding: 25px; border: 2px solid var(--border); margin-bottom: 30px; }
+.block h3 { margin-top: 0; color: var(--dark-color); font-family: var(--font-title); }
+.block p { margin: 0 0 12px; }
+.block p:last-child { margin-bottom: 0; }
+
+.grid { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
+.stat-box { flex: 1; min-width: 180px; background: var(--card-bg); border: 2px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+.stat-box strong { display: block; font-size: 2rem; color: #d84315; font-family: var(--font-title); }
+.stat-box span { color: #5f6c6d; font-weight: 600; }
+
+.fact-table { width: 100%; border-collapse: collapse; }
+.fact-table th, .fact-table td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.fact-table th { width: 36%; color: var(--dark-color); }
+
+.list { list-style: none; padding: 0; margin: 0; }
+.list li { position: relative; padding-left: 32px; margin-bottom: 12px; }
+.list li::before { position: absolute; left: 0; top: 1px; }
+.list.maps li::before { content: "📍"; }
+.list.dev li::before { content: "⚙️"; }
+.list.data li::before { content: "🔹"; }
+
+.tag-container { margin-top: 12px; line-height: 2.5; }
+.tag { display: inline-block; background: #fff; color: var(--dark-color); padding: 4px 14px; border-radius: 30px; font-weight: 600; margin: 0 8px 8px 0; border: 2px solid #cbd5e1; }
+.tag-highlight { border-color: var(--secondary-color); background: #e8f5e9; color: #2e7d32; }
+
+.policy h2 { font-family: var(--font-title); color: var(--dark-color); margin: 28px 0 10px; }
+.policy ul { padding-left: 22px; }
+.lang-switch { text-align: center; margin: 20px 0 0; }
+
+footer { text-align: center; font-size: .95rem; color: #5f6c6d; border-top: 2px dashed #cbd5e1; padding: 24px 20px 40px; margin-top: 50px; }
+footer p { margin: 4px 0; }
